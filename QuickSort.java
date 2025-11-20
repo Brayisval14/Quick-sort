@@ -1,4 +1,9 @@
+import java.io.*;
+import java.util.*;
+
 public class QuickSort {
+
+    // ---------------- ALGORITMO QUICK SORT ----------------
     public static void quickSort(int[] arr, int inicio, int fin) {
         if (inicio < fin) {
             int pivote = particion(arr, inicio, fin);
@@ -14,6 +19,7 @@ public class QuickSort {
         for (int j = inicio; j < fin; j++) {
             if (arr[j] <= pivote) {
                 i++;
+
                 int temp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = temp;
@@ -27,12 +33,31 @@ public class QuickSort {
         return i + 1;
     }
 
+    // --------------------------- MAIN ---------------------------
     public static void main(String[] args) {
-        int[] datos = {5, 3, 8, 4, 2};
-        quickSort(datos, 0, datos.length - 1);
+        try {
+            // Leer archivo
+            Scanner sc = new Scanner(new File("input.txt"));
+            List<Integer> lista = new ArrayList<>();
 
-        for (int n : datos) {
-            System.out.print(n + " ");
+            while (sc.hasNextInt()) {
+                lista.add(sc.nextInt());
+            }
+
+            int[] datos = lista.stream().mapToInt(i -> i).toArray();
+
+            // Ordenar usando QuickSort
+            quickSort(datos, 0, datos.length - 1);
+
+            // Guardar archivo de salida
+            PrintWriter pw = new PrintWriter("output.txt");
+            for (int n : datos) pw.print(n + " ");
+            pw.close();
+
+            System.out.println("¡Quick Sort terminado! Revisa output.txt");
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
         }
     }
 }
