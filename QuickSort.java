@@ -32,32 +32,14 @@ public class QuickSort {
 
         return i + 1;
     }
+    // ---------------- MÉTODO PRINCIPAL ----------------
+    public static void main(String[] args) {                    
+        int[] arr = {34, 7, 23, 32, 5, 62};
+        System.out.println("Array original: " + Arrays.toString(arr));
 
-    // --------------------------- MAIN ---------------------------
-    public static void main(String[] args) {
-        try {
-            // Leer archivo
-            Scanner sc = new Scanner(new File("input.txt"));
-            List<Integer> lista = new ArrayList<>();
+        quickSort(arr, 0, arr.length - 1);
 
-            while (sc.hasNextInt()) {
-                lista.add(sc.nextInt());
-            }
-
-            int[] datos = lista.stream().mapToInt(i -> i).toArray();
-
-            // Ordenar usando QuickSort
-            quickSort(datos, 0, datos.length - 1);
-
-            // Guardar archivo de salida
-            PrintWriter pw = new PrintWriter("output.txt");
-            for (int n : datos) pw.print(n + " ");
-            pw.close();
-
-            System.out.println("¡Quick Sort terminado! Revisa output.txt");
-
-        } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        System.out.println("Array ordenado: " + Arrays.toString(arr));
     }
+  
 }
